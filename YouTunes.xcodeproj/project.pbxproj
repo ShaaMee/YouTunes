@@ -7,19 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE44CA02272C317C00558F9C /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44CA01272C317C00558F9C /* HistoryTableViewController.swift */; };
+		CE44CA05272C31E700558F9C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44CA04272C31E700558F9C /* DetailsViewController.swift */; };
+		CE44CA0B272C361F00558F9C /* SearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44CA0A272C361F00558F9C /* SearchResultsCollectionViewController.swift */; };
 		CEB90529272B28FA00126849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB90528272B28FA00126849 /* AppDelegate.swift */; };
 		CEB9052B272B28FA00126849 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9052A272B28FA00126849 /* SceneDelegate.swift */; };
-		CEB9052D272B28FA00126849 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9052C272B28FA00126849 /* ViewController.swift */; };
+		CEB9052D272B28FA00126849 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9052C272B28FA00126849 /* SearchViewController.swift */; };
 		CEB90530272B28FA00126849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB9052E272B28FA00126849 /* Main.storyboard */; };
 		CEB90532272B28FF00126849 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB90531272B28FF00126849 /* Assets.xcassets */; };
 		CEB90535272B28FF00126849 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB90533272B28FF00126849 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE44CA01272C317C00558F9C /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		CE44CA04272C31E700558F9C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		CE44CA0A272C361F00558F9C /* SearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsCollectionViewController.swift; sourceTree = "<group>"; };
 		CEB90525272B28FA00126849 /* YouTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB90528272B28FA00126849 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB9052A272B28FA00126849 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEB9052C272B28FA00126849 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CEB9052C272B28FA00126849 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CEB9052F272B28FA00126849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEB90531272B28FF00126849 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB90534272B28FF00126849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,7 +64,10 @@
 			children = (
 				CEB90528272B28FA00126849 /* AppDelegate.swift */,
 				CEB9052A272B28FA00126849 /* SceneDelegate.swift */,
-				CEB9052C272B28FA00126849 /* ViewController.swift */,
+				CEB9052C272B28FA00126849 /* SearchViewController.swift */,
+				CE44CA01272C317C00558F9C /* HistoryTableViewController.swift */,
+				CE44CA04272C31E700558F9C /* DetailsViewController.swift */,
+				CE44CA0A272C361F00558F9C /* SearchResultsCollectionViewController.swift */,
 				CEB9052E272B28FA00126849 /* Main.storyboard */,
 				CEB90531272B28FF00126849 /* Assets.xcassets */,
 				CEB90533272B28FF00126849 /* LaunchScreen.storyboard */,
@@ -137,9 +146,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB9052D272B28FA00126849 /* ViewController.swift in Sources */,
+				CE44CA02272C317C00558F9C /* HistoryTableViewController.swift in Sources */,
+				CEB9052D272B28FA00126849 /* SearchViewController.swift in Sources */,
 				CEB90529272B28FA00126849 /* AppDelegate.swift in Sources */,
 				CEB9052B272B28FA00126849 /* SceneDelegate.swift in Sources */,
+				CE44CA05272C31E700558F9C /* DetailsViewController.swift in Sources */,
+				CE44CA0B272C361F00558F9C /* SearchResultsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -289,6 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5JFF3U9J3C;
 				INFOPLIST_FILE = YouTunes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,7 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexeypavlov.YouTunes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,6 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5JFF3U9J3C;
 				INFOPLIST_FILE = YouTunes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +329,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexeypavlov.YouTunes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
