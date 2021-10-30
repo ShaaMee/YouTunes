@@ -20,7 +20,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
             }
         }
     }
-    
+        
     private var albums: [ThumbnailResult]? {
         return albumsInfo?.results
     }
@@ -29,7 +29,6 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
@@ -127,7 +126,18 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
 extension SearchResultsCollectionViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+                
         guard let searchText = searchBar.text else { return }
+        
+        if var searchHistory: Array<String> = UserDefaults.standard.stringArray(forKey: Constants.historySearchKey) {
+            if !searchHistory.contains(searchText) {
+                searchHistory.append(searchText)
+                UserDefaults.standard.setValue(searchHistory, forKey: Constants.historySearchKey)
+            }
+        } else {
+            UserDefaults.standard.setValue([searchText], forKey: Constants.historySearchKey)
+        }
+
         albumsInfo = nil
         view.addSubview(activityIndicator)
         activityIndicator.isHidden = false

@@ -9,30 +9,18 @@ import UIKit
 
 class HistoryTableViewController: UITableViewController {
     
-    var searchHistory = [String]()
+    var searchHistory: [String] {
+        return UserDefaults.standard.stringArray(forKey: Constants.historySearchKey) ?? []
+    }
     
-//    private var albumThumbnailInfo: AlbumThumbnailInfo? {
-//        didSet {
-//            guard let allAlbums = albumThumbnailInfo?.results else { return }
-//            searchHistory = []
-//
-//            for album in allAlbums {
-//                guard let albumName = album.collectionName else { return }
-//                searchHistory.append(albumName)
-//            }
-//
-//            DispatchQueue.main.async { [weak self] in
-//                self?.tableView.reloadData()
-//            }
-//        }
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        albumThumbnailInfo = NetworkService.shared.fetchAlbumsForTerm("Sting") { [weak self] albumThumbnailInfo in
-//            self?.albumThumbnailInfo = albumThumbnailInfo
-//        }
     }
 
     // MARK: - Table view data source
@@ -44,7 +32,7 @@ class HistoryTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.historyCellIdentifier, for: indexPath)
         guard searchHistory.indices.contains(indexPath.row) else { return cell}
         cell.textLabel?.text = searchHistory[indexPath.row]
 
