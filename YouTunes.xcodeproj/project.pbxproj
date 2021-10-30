@@ -16,7 +16,6 @@
 		CE44CA29272D544600558F9C /* AlbumDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44CA28272D544600558F9C /* AlbumDetails.swift */; };
 		CEB90529272B28FA00126849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB90528272B28FA00126849 /* AppDelegate.swift */; };
 		CEB9052B272B28FA00126849 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9052A272B28FA00126849 /* SceneDelegate.swift */; };
-		CEB9052D272B28FA00126849 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9052C272B28FA00126849 /* SearchViewController.swift */; };
 		CEB90530272B28FA00126849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB9052E272B28FA00126849 /* Main.storyboard */; };
 		CEB90532272B28FF00126849 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB90531272B28FF00126849 /* Assets.xcassets */; };
 		CEB90535272B28FF00126849 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB90533272B28FF00126849 /* LaunchScreen.storyboard */; };
@@ -33,7 +32,6 @@
 		CEB90525272B28FA00126849 /* YouTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB90528272B28FA00126849 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB9052A272B28FA00126849 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEB9052C272B28FA00126849 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CEB9052F272B28FA00126849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEB90531272B28FF00126849 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB90534272B28FF00126849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 		CE44CA17272C5E9F00558F9C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CEB9052C272B28FA00126849 /* SearchViewController.swift */,
 				CE44CA01272C317C00558F9C /* HistoryTableViewController.swift */,
 				CE44CA04272C31E700558F9C /* DetailsViewController.swift */,
 				CE44CA0A272C361F00558F9C /* SearchResultsCollectionViewController.swift */,
@@ -118,10 +115,10 @@
 		CEB90527272B28FA00126849 /* YouTunes */ = {
 			isa = PBXGroup;
 			children = (
-				CE44CA26272D532F00558F9C /* Services */,
 				CE44CA15272C5E6A00558F9C /* Model */,
 				CE44CA16272C5E7800558F9C /* View */,
 				CE44CA17272C5E9F00558F9C /* Controller */,
+				CE44CA26272D532F00558F9C /* Services */,
 				CE44CA19272C5EB500558F9C /* Supporting Files */,
 				CEB90536272B28FF00126849 /* Info.plist */,
 			);
@@ -199,7 +196,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE44CA02272C317C00558F9C /* HistoryTableViewController.swift in Sources */,
-				CEB9052D272B28FA00126849 /* SearchViewController.swift in Sources */,
 				CE44CA0F272C484D00558F9C /* SearchResultsCollectionViewCell.swift in Sources */,
 				CEB90529272B28FA00126849 /* AppDelegate.swift in Sources */,
 				CE44CA23272D531300558F9C /* NetworkService.swift in Sources */,

@@ -19,13 +19,13 @@ class NetworkService {
     
     // MARK: - Fetching artist's albums from iTunes API
     
-    func fetchAlbumsForTerm(_ searchTerm: String, completionHadler: @escaping (AlbumThumbnailInfo) -> Void) -> AlbumThumbnailInfo? {
+    func fetchAlbumsForTerm(_ searchTerm: String, completionHadler: @escaping (AlbumThumbnailInfo) -> Void) {
         let formattedSearchString = searchTerm
             .trimmingCharacters(in: .whitespaces)
             .replacingOccurrences(of: " ", with: "+")
         let searchURLString = "https://itunes.apple.com/search?term=" + formattedSearchString + "&media=music&entity=album"
         
-        guard let url = URL(string: searchURLString) else { return nil }
+        guard let url = URL(string: searchURLString) else { return }
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             
             if let error = error{
@@ -44,12 +44,16 @@ class NetworkService {
                 }
             }
         }.resume()
-        return nil
+        return
     }
     
     // MARK: - Fetching album delails from iTunes API
     
     func fetchAlbumDetailsForAlbumID(_ albumID: Int) -> AlbumDetails? {
+        
+        //URL for album details
+        //https://itunes.apple.com/lookup?id=211192863&entity=song
+        
         return nil
     }
 }

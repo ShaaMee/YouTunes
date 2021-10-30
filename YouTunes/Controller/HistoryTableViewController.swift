@@ -10,28 +10,29 @@ import UIKit
 class HistoryTableViewController: UITableViewController {
     
     var searchHistory = [String]()
-    private var albumThumbnailInfo: AlbumThumbnailInfo? {
-        didSet {
-            guard let allAlbums = albumThumbnailInfo?.results else { return }
-            searchHistory = []
-            
-            for album in allAlbums {
-                guard let albumName = album.collectionName else { return }
-                searchHistory.append(albumName)
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
-            }
-        }
-    }
+    
+//    private var albumThumbnailInfo: AlbumThumbnailInfo? {
+//        didSet {
+//            guard let allAlbums = albumThumbnailInfo?.results else { return }
+//            searchHistory = []
+//
+//            for album in allAlbums {
+//                guard let albumName = album.collectionName else { return }
+//                searchHistory.append(albumName)
+//            }
+//
+//            DispatchQueue.main.async { [weak self] in
+//                self?.tableView.reloadData()
+//            }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        albumThumbnailInfo = NetworkService.shared.fetchAlbumsForTerm("Sting") { [weak self] albumThumbnailInfo in
-            self?.albumThumbnailInfo = albumThumbnailInfo
-        }
+//        albumThumbnailInfo = NetworkService.shared.fetchAlbumsForTerm("Sting") { [weak self] albumThumbnailInfo in
+//            self?.albumThumbnailInfo = albumThumbnailInfo
+//        }
     }
 
     // MARK: - Table view data source

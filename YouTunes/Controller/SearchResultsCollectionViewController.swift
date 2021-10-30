@@ -9,17 +9,38 @@ import UIKit
 
 private let reuseIdentifier = "albumCell"
 
-class SearchResultsCollectionViewController: UICollectionViewController {
+class SearchResultsCollectionViewController: UICollectionViewController, UISearchControllerDelegate {
+    
+    var albumsInfo: AlbumThumbnailInfo?
+    {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+                self?.collectionView.layoutSubviews()
+            }
+        }
+    }
+    
+    private var albums: [ThumbnailResult]? {
+        return albumsInfo?.results
+    }
+    
+    private let activityIndicator = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+    
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Type here artist's name"
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
+        activityIndicator.isHidden = true
+        
         // Do any additional setup after loading the view.
     }
 
@@ -35,23 +56,30 @@ class SearchResultsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+ 
+        guard let albums = albums else { return 0 }
+        return albums.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
+        guard let searchCell = cell as? SearchResultsCollectionViewCell else { return cell }
+        guard let albums = albums else { return cell }
+        
+        if let artWorkURL = albums[indexPath.row].artworkUrl100 {
+            guard let url = URL(string: artWorkURL),
+                  let data = try? Data(contentsOf: url),
+                  let image = UIImage(data: data)
+            else { return UICollectionViewCell() }
+            searchCell.albumArtwork.image = image
+        }
+        
+        searchCell.artistName.text = albums[indexPath.row].artistName
+        searchCell.albumName.text = albums[indexPath.row].collectionName
+        
+        return searchCell
     }
 
     // MARK: UICollectionViewDelegate
@@ -86,3 +114,27 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     */
 
 }
+
+extension SearchResultsCollectionViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        albumsInfo = nil
+        view.addSubview(activityIndicator)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        NetworkService.shared.fetchAlbumsForTerm(searchText) { [weak self] albumThumbnailInfo in
+            self?.albumsInfo = albumThumbnailInfo
+                DispatchQueue.main.async {
+                    self?.activityIndicator.isHidden = true
+                    self?.activityIndicator.stopAnimating()
+                    self?.activityIndicator.removeFromSuperview()
+                }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        albumsInfo = nil
+    }
+}
+

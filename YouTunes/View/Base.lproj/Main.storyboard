@@ -10,43 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="SearchViewController" customModule="YouTunes" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j7s-m3-rvA">
-                                <rect key="frame" x="8" y="96" width="398" height="56"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
-                            </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't typed anything yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ieu-dl-tDg">
-                                <rect key="frame" x="86.5" y="414" width="241.5" height="68"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="j7s-m3-rvA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="B0q-wQ-Hpt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ieu-dl-tDg" secondAttribute="trailing" constant="40" id="I3K-cC-ULf"/>
-                            <constraint firstItem="Ieu-dl-tDg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="NU7-g4-3xE"/>
-                            <constraint firstItem="j7s-m3-rvA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="gAp-zs-QFG"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j7s-m3-rvA" secondAttribute="trailing" constant="8" id="mEA-ka-jqQ"/>
-                            <constraint firstItem="Ieu-dl-tDg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nNn-MH-ktD"/>
-                            <constraint firstItem="Ieu-dl-tDg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qiF-yt-jc3"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Search" id="Wru-C1-k6s"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1842.0289855072465" y="-229.01785714285714"/>
-        </scene>
         <!--Details View Controller-->
         <scene sceneID="rYW-Kx-vvf">
             <objects>
@@ -170,7 +133,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="zdJ-zt-XB0" kind="show" id="VLT-13-fsP"/>
+                                    <segue destination="zdJ-zt-XB0" kind="show" id="fk8-eG-rcG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -241,6 +204,9 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="albumArtwork" destination="wAy-ry-7hw" id="Yji-AN-esm"/>
+                                    <outlet property="albumName" destination="iS8-Wo-IA0" id="h45-Rr-qms"/>
+                                    <outlet property="artistName" destination="tKA-Yc-4pY" id="paD-Gp-K0l"/>
                                     <segue destination="SAp-1X-mhj" kind="show" id="Hv3-Lw-naU"/>
                                 </connections>
                             </collectionViewCell>
@@ -306,7 +272,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="PcV-D9-l6m"/>
+                        <segue destination="zdJ-zt-XB0" kind="relationship" relationship="rootViewController" id="0si-jZ-RJr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yqk-fk-3aw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -314,6 +280,9 @@
             <point key="canvasLocation" x="931.88405797101461" y="-229.01785714285714"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="0si-jZ-RJr"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="102"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
