@@ -8,37 +8,21 @@
 import Foundation
 
 // MARK: - AlbumDetails
-struct AlbumDetails {
+struct AlbumDetails: Codable {
     var resultCount: Int?
-    var results: [Result]?
+    var results: [AlbumInfo]?
 }
 
 // MARK: - Result
-struct Result {
-    var wrapperType: WrapperType?
-    var collectionType: String?
+struct AlbumInfo: Codable {
     var artistName: String?
     var collectionName: String?
-    var artistViewURL, collectionViewURL: String?
-    var artworkUrl60, artworkUrl100: String?
-    var collectionPrice: Double?
-    var trackCount: Int?
-    var copyright: String?
+    var artworkUrl100: String?
+    var artworkUrl240: String? {
+        return artworkUrl100?.replacingOccurrences(of: "100x100", with: "240x240")
+    }
     var releaseDate: Date?
     var primaryGenreName: String?
-    var trackID: Int?
-    var trackName, trackCensoredName: String?
-    var collectionArtistID: Int?
-    var collectionArtistName: String?
-    var collectionArtistViewURL, trackViewURL: String?
-    var previewURL: String?
-    var artworkUrl30: String?
-    var trackPrice: Double?
-    var discCount, discNumber, trackNumber, trackTimeMillis: Int?
-    var isStreamable: Bool?
-}
-
-enum WrapperType {
-    case collection
-    case track
+    var trackName: String?
+    var trackNumber: Int?
 }

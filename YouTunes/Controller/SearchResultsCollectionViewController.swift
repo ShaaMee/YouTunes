@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "albumCell"
-
 class SearchResultsCollectionViewController: UICollectionViewController, UISearchControllerDelegate {
     
     var albumsInfo: AlbumThumbnailInfo?
@@ -20,12 +18,35 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
             }
         }
     }
-        
-    private var albums: [ThumbnailResult]? {
-        return albumsInfo?.results
-    }
     
     private let activityIndicator = UIActivityIndicatorView()
+    
+    var isSearching = false {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch self.isSearching {
+                case true:
+                    if let view = self.view {
+                        view.addSubview(self.activityIndicator)
+                    }
+                    self.activityIndicator.isHidden = false
+                    self.activityIndicator.startAnimating()
+                case false:
+                    self.activityIndicator.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.removeFromSuperview()
+                }
+            }
+        }
+    }
+        
+    private var albums: [ThumbnailResult]? {
+        return albumsInfo?.results?.sorted { album1, album2 in
+            guard let name1 = album1.collectionName, let name2 = album2.collectionName else { return false }
+            return name1.lowercased() < name2.lowercased()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,22 +58,24 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
         navigationItem.searchController = searchController
         
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
-        activityIndicator.isHidden = true
-        
-        // Do any additional setup after loading the view.
+        view.addSubview(activityIndicator)
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        guard segue.identifier == Constants.detailsSegueIdentifier,
+              let destinationVC = segue.destination as? DetailsViewController,
+              let item = sender as? SearchResultsCollectionViewCell,
+              let albumID = item.albumID
+        else { return }
+        
+        NetworkService.shared.fetchAlbumDetailsForAlbumID(albumID) { albumDetails in
+            destinationVC.albumDetails = albumDetails
+        }
     }
-    */
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
  
@@ -62,13 +85,14 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionCellIdentifier, for: indexPath)
         guard let searchCell = cell as? SearchResultsCollectionViewCell else { return cell }
         guard let albums = albums else { return cell }
         
         searchCell.artistName.text = albums[indexPath.row].artistName
         searchCell.albumName.text = albums[indexPath.row].collectionName
-        searchCell.albumArtwork.image = UIImage(systemName: "photo")
+        searchCell.albumID = albums[indexPath.row].collectionId
+        searchCell.albumArtwork.image = UIImage(systemName: Constants.albumNoImageSystemName)
         searchCell.albumArtwork.tintColor = .systemGray6
         
         DispatchQueue.global(qos: .utility).async {
@@ -90,7 +114,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
         return searchCell
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
@@ -139,15 +163,11 @@ extension SearchResultsCollectionViewController: UISearchBarDelegate {
         }
 
         albumsInfo = nil
-        view.addSubview(activityIndicator)
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+        isSearching = true
         NetworkService.shared.fetchAlbumsForTerm(searchText) { [weak self] albumThumbnailInfo in
             self?.albumsInfo = albumThumbnailInfo
                 DispatchQueue.main.async {
-                    self?.activityIndicator.isHidden = true
-                    self?.activityIndicator.stopAnimating()
-                    self?.activityIndicator.removeFromSuperview()
+                    self?.isSearching = false
                 }
         }
     }

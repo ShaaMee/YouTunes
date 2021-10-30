@@ -39,14 +39,24 @@ class HistoryTableViewController: UITableViewController {
         return cell
     }
 
-    /*
-    // MARK: - Navigation
+
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard segue.identifier == Constants.searchHistoryToResultsSegueIdetifier, let searchVC = segue.destination as? SearchResultsCollectionViewController, let cell = sender as? UITableViewCell else { return }
+        if let searchTerm = cell.textLabel?.text {
+            searchVC.isSearching = true
+            NetworkService.shared.fetchAlbumsForTerm(searchTerm) { albumThumbnailInfo in
+                searchVC.albumsInfo = albumThumbnailInfo
+                searchVC.isSearching = false
+            }
+        }
+        
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

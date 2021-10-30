@@ -33,8 +33,6 @@ class NetworkService {
             } else if let data = data,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200 {
-                print("I got data: \(data)")
-                
                 do {
                     if let albumThimbnailInfo = try self?.decoder.decode(AlbumThumbnailInfo.self, from: data) {
                         completionHadler(albumThimbnailInfo)
@@ -44,16 +42,33 @@ class NetworkService {
                 }
             }
         }.resume()
-        return
     }
     
     // MARK: - Fetching album delails from iTunes API
     
-    func fetchAlbumDetailsForAlbumID(_ albumID: Int) -> AlbumDetails? {
+    func fetchAlbumDetailsForAlbumID(_ albumID: Int, completionHadler: @escaping (AlbumDetails) -> Void) {
+        let searchURLString = "https://itunes.apple.com/lookup?id=\(albumID)&entity=song"
+        guard let url = URL(string: searchURLString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            
+            if let error = error{
+                print(error.localizedDescription)
+            } else if let data = data,
+                      let response = response as? HTTPURLResponse,
+                      response.statusCode == 200 {                
+                do {
+                    if let albumDetails = try self?.decoder.decode(AlbumDetails.self, from: data) {
+                        completionHadler(albumDetails)
+                    }
+                } catch {
+                    print("Can't decode AlbumDetails JSON")
+                }
+            }
+        }.resume()
         
         //URL for album details
         //https://itunes.apple.com/lookup?id=211192863&entity=song
         
-        return nil
     }
 }
