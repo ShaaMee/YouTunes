@@ -30,8 +30,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "Type here artist's name"
+        
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.delegate = self
@@ -68,16 +67,26 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
         guard let searchCell = cell as? SearchResultsCollectionViewCell else { return cell }
         guard let albums = albums else { return cell }
         
-        if let artWorkURL = albums[indexPath.row].artworkUrl100 {
-            guard let url = URL(string: artWorkURL),
-                  let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data)
-            else { return UICollectionViewCell() }
-            searchCell.albumArtwork.image = image
-        }
-        
         searchCell.artistName.text = albums[indexPath.row].artistName
         searchCell.albumName.text = albums[indexPath.row].collectionName
+        searchCell.albumArtwork.image = UIImage(systemName: "photo")
+        searchCell.albumArtwork.tintColor = .systemGray6
+        
+        DispatchQueue.global(qos: .utility).async {
+            if let artWorkURL = albums[indexPath.row].artworkUrl100 {
+                guard let url = URL(string: artWorkURL),
+                      let data = try? Data(contentsOf: url),
+                      let image = UIImage(data: data)
+                else { return }
+                DispatchQueue.main.async {
+                    searchCell.albumArtwork.image = image
+                    searchCell.layoutIfNeeded()
+                }
+
+            }
+        }
+        
+        
         
         return searchCell
     }
