@@ -99,7 +99,7 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.songCellIdentifier, for: indexPath)
         if tracks.indices.contains(indexPath.row) {
-            cell.textLabel?.text = tracks[indexPath.row]
+            cell.textLabel?.text = "\(indexPath.row + 1). " + tracks[indexPath.row]
         }
         return cell
     }
