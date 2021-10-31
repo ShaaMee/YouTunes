@@ -9,6 +9,9 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     var albumDetails: AlbumDetails? {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -16,7 +19,12 @@ class DetailsViewController: UIViewController {
             }
         }
     }
-    var tracks = [String]()
+    var tracks = [String]() {
+        didSet {
+            songsTableView.reloadData()
+            tableViewHeight.constant = CGFloat(44 * Double(tracks.count))
+        }
+    }
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
@@ -31,10 +39,12 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        albumCover.image = UIImage(systemName: Constants.albumNoImageSystemName)
+        albumCover.tintColor = .systemGray6
         songsTableView.delegate = self
         songsTableView.dataSource = self
-
+        
     }
     
     func extractDataFromAlbumDetails() {
@@ -42,8 +52,7 @@ class DetailsViewController: UIViewController {
               let resultCount = albumDetails.resultCount,
               resultCount > 0
         else { return }
-        albumName.text = albumDetails.results?.first?.collectionName
-        artistName.text = albumDetails.results?.first?.artistName
+        
         var genreYear = ""
         let genre = albumDetails.results?.first?.primaryGenreName
         genreYear += genre ?? ""
@@ -52,7 +61,31 @@ class DetailsViewController: UIViewController {
             let year = dateFormatter.string(from: date)
             genreYear += "・\(year)"
         }
+        
         genreAndYear.text = genreYear
+        albumName.text = albumDetails.results?.first?.collectionName
+        artistName.text = albumDetails.results?.first?.artistName
+        
+        guard let coverURL = albumDetails.results?.first?.artworkUrl240,
+              let url = URL(string: coverURL),
+              let data = try? Data(contentsOf: url),
+              let image = UIImage(data: data)
+        else { return }
+        
+        albumCover.image = image
+        
+        loadSongs()
+    }
+    
+    func loadSongs(){
+        guard let results = albumDetails?.results else { return }
+        var allTracks = [String]()
+        for index in 1..<results.count {
+            if let track = results[index].trackName {
+                allTracks.append(track)
+            }
+        }
+        tracks = allTracks
     }
 }
 
@@ -68,6 +101,4 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-    
-    
 }

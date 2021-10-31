@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMf-wX-0dw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="790"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="584.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L0X-Tt-KXk">
                                                 <rect key="frame" x="87" y="42" width="240" height="240"/>
@@ -31,30 +31,32 @@
                                                     <constraint firstAttribute="height" constant="240" id="m4e-cR-cdc"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQf-Ak-e9e">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Album name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQf-Ak-e9e">
                                                 <rect key="frame" x="150" y="297" width="114" height="23"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9L-ld-KLH">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9L-ld-KLH">
                                                 <rect key="frame" x="158.5" y="328" width="97" height="23"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GERNE・YEAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ot6-u4-gEg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="GERNE・YEAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ot6-u4-gEg">
                                                 <rect key="frame" x="154.5" y="359" width="105" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AhO-0k-4jP">
-                                                <rect key="frame" x="8" y="384.5" width="398" height="405.5"/>
-                                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AhO-0k-4jP">
+                                                <rect key="frame" x="8" y="384.5" width="398" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="Sot-hm-bqg"/>
+                                                </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songCell" id="agk-K3-E5c">
-                                                        <rect key="frame" x="0.0" y="55.5" width="398" height="43.5"/>
+                                                        <rect key="frame" x="0.0" y="28" width="398" height="43.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="agk-K3-E5c" id="7l9-b3-0jl">
                                                             <rect key="frame" x="0.0" y="0.0" width="398" height="43.5"/>
@@ -64,20 +66,25 @@
                                                 </prototypes>
                                             </tableView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="AhO-0k-4jP" firstAttribute="top" secondItem="Ot6-u4-gEg" secondAttribute="bottom" constant="8" symbolic="YES" id="2Nz-L2-exK"/>
-                                            <constraint firstAttribute="height" priority="750" constant="790" id="EdX-fy-HXD"/>
+                                            <constraint firstItem="AhO-0k-4jP" firstAttribute="top" secondItem="Ot6-u4-gEg" secondAttribute="bottom" constant="8" id="2er-RI-p1W"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R9L-ld-KLH" secondAttribute="trailing" constant="8" id="3P7-vf-RSS"/>
                                             <constraint firstItem="L0X-Tt-KXk" firstAttribute="top" secondItem="cMf-wX-0dw" secondAttribute="top" constant="42" id="Eqy-WJ-8dh"/>
                                             <constraint firstAttribute="bottom" secondItem="AhO-0k-4jP" secondAttribute="bottom" id="I9F-Xl-t0K"/>
                                             <constraint firstItem="AhO-0k-4jP" firstAttribute="leading" secondItem="cMf-wX-0dw" secondAttribute="leading" constant="8" id="IAM-2M-3Gd"/>
                                             <constraint firstItem="L0X-Tt-KXk" firstAttribute="centerX" secondItem="cMf-wX-0dw" secondAttribute="centerX" id="KCE-7z-OYX"/>
                                             <constraint firstItem="uQf-Ak-e9e" firstAttribute="top" secondItem="L0X-Tt-KXk" secondAttribute="bottom" constant="15" id="L8L-pP-TK9"/>
+                                            <constraint firstItem="R9L-ld-KLH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cMf-wX-0dw" secondAttribute="leading" constant="8" id="Lqk-DX-CnN"/>
                                             <constraint firstItem="R9L-ld-KLH" firstAttribute="top" secondItem="uQf-Ak-e9e" secondAttribute="bottom" constant="8" symbolic="YES" id="Xvm-D5-Y8Y"/>
                                             <constraint firstItem="Ot6-u4-gEg" firstAttribute="top" secondItem="R9L-ld-KLH" secondAttribute="bottom" constant="8" symbolic="YES" id="aev-sJ-TBQ"/>
                                             <constraint firstAttribute="trailing" secondItem="AhO-0k-4jP" secondAttribute="trailing" constant="8" id="cXF-b0-Iub"/>
                                             <constraint firstItem="uQf-Ak-e9e" firstAttribute="centerX" secondItem="cMf-wX-0dw" secondAttribute="centerX" id="ejb-kL-gjl"/>
                                             <constraint firstItem="R9L-ld-KLH" firstAttribute="centerX" secondItem="cMf-wX-0dw" secondAttribute="centerX" id="hjj-av-bS1"/>
+                                            <constraint firstItem="uQf-Ak-e9e" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cMf-wX-0dw" secondAttribute="leading" constant="8" id="hq8-lL-AjN"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uQf-Ak-e9e" secondAttribute="trailing" constant="8" id="mb0-9Q-lAT"/>
+                                            <constraint firstItem="AhO-0k-4jP" firstAttribute="top" secondItem="Ot6-u4-gEg" secondAttribute="bottom" constant="8" symbolic="YES" id="tm8-gM-Mks"/>
                                             <constraint firstItem="Ot6-u4-gEg" firstAttribute="centerX" secondItem="cMf-wX-0dw" secondAttribute="centerX" id="zmN-9L-DMf"/>
                                         </constraints>
                                     </view>
@@ -98,8 +105,10 @@
                         <constraints>
                             <constraint firstItem="DyK-Km-QsA" firstAttribute="trailing" secondItem="bax-ub-C9d" secondAttribute="trailing" id="7ao-Ow-QqM"/>
                             <constraint firstItem="DyK-Km-QsA" firstAttribute="leading" secondItem="bax-ub-C9d" secondAttribute="leading" id="8ue-7A-eJd"/>
+                            <constraint firstItem="DyK-Km-QsA" firstAttribute="width" secondItem="bax-ub-C9d" secondAttribute="width" id="Rpb-uL-wu6"/>
                             <constraint firstItem="DyK-Km-QsA" firstAttribute="top" secondItem="bax-ub-C9d" secondAttribute="top" id="YGo-Cr-7OH"/>
-                            <constraint firstItem="DyK-Km-QsA" firstAttribute="bottom" secondItem="bax-ub-C9d" secondAttribute="bottom" id="a2W-sF-VOF"/>
+                            <constraint firstItem="DyK-Km-QsA" firstAttribute="height" secondItem="bax-ub-C9d" secondAttribute="height" id="aKO-Uu-1HX"/>
+                            <constraint firstItem="DyK-Km-QsA" firstAttribute="bottom" secondItem="bax-ub-C9d" secondAttribute="bottom" id="qpx-b7-cxC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yLu-qC-51q"/>
@@ -107,8 +116,11 @@
                         <outlet property="albumCover" destination="L0X-Tt-KXk" id="prC-QV-xhO"/>
                         <outlet property="albumName" destination="uQf-Ak-e9e" id="tBz-KJ-B0A"/>
                         <outlet property="artistName" destination="R9L-ld-KLH" id="o6t-f1-L4u"/>
+                        <outlet property="contentView" destination="cMf-wX-0dw" id="qrI-m0-0vV"/>
                         <outlet property="genreAndYear" destination="Ot6-u4-gEg" id="hUU-9e-9FH"/>
+                        <outlet property="scrollView" destination="DyK-Km-QsA" id="Ixn-qu-Pv4"/>
                         <outlet property="songsTableView" destination="AhO-0k-4jP" id="I5J-S8-iYI"/>
+                        <outlet property="tableViewHeight" destination="Sot-hm-bqg" id="1gd-hJ-Mgv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ruj-2d-p7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
