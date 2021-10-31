@@ -53,4 +53,24 @@ class HistoryTableViewController: UITableViewController {
             }
         }
     }
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+      return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      
+      if editingStyle == .delete {
+        if var value = UserDefaults.standard.stringArray(forKey: Constants.historySearchKey),
+           value.contains(searchHistory[indexPath.row]) {
+            value.remove(at: indexPath.row)
+            UserDefaults.standard.setValue(value, forKey: Constants.historySearchKey)
+        }
+        tableView.reloadData()
+      }
+      
+    }
+
 }
