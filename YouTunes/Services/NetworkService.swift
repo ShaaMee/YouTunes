@@ -54,7 +54,7 @@ class NetworkService {
         }
     }
     
-    func networkRequestFor(string: String, alertViewController vc: UIViewController, completionHandler: @escaping (AlbumThumbnailInfo?, AlbumDetails?) -> Void){
+    private func networkRequestFor(string: String, alertViewController vc: UIViewController, completionHandler: @escaping (AlbumThumbnailInfo?, AlbumDetails?) -> Void){
         
         guard let url = URL(string: string) else { return }
         

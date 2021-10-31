@@ -10,6 +10,11 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var albumCover: UIImageView!
+    @IBOutlet weak var albumName: UILabel!
+    @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var genreAndYear: UILabel!
+    @IBOutlet weak var songsTableView: UITableView!
     
     var albumDetails: AlbumDetails? {
         didSet {
@@ -18,23 +23,19 @@ class DetailsViewController: UIViewController {
             }
         }
     }
-    var tracks = [String]() {
+    
+    private var tracks = [String]() {
         didSet {
             songsTableView.reloadData()
-            tableViewHeight.constant = CGFloat(44 * Double(tracks.count))
+            tableViewHeight.constant = CGFloat(Constants.songsListRowHeight * Double(tracks.count))
         }
     }
-    let dateFormatter: DateFormatter = {
+    
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
         return formatter
     }()
-    
-    @IBOutlet weak var albumCover: UIImageView!
-    @IBOutlet weak var albumName: UILabel!
-    @IBOutlet weak var artistName: UILabel!
-    @IBOutlet weak var genreAndYear: UILabel!
-    @IBOutlet weak var songsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,10 @@ class DetailsViewController: UIViewController {
         albumCover.tintColor = .systemGray6
         songsTableView.delegate = self
         songsTableView.dataSource = self
-        
     }
     
-    func extractDataFromAlbumDetails() {
+    private func extractDataFromAlbumDetails() {
+        
         guard let albumDetails = albumDetails,
               let resultCount = albumDetails.resultCount,
               resultCount > 0
@@ -79,7 +80,8 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    func loadSongs(){
+    private func loadSongs(){
+        
         guard let results = albumDetails?.results else { return }
         var allTracks = [String]()
         for index in 1..<results.count {
@@ -92,11 +94,13 @@ class DetailsViewController: UIViewController {
 }
 
 extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tracks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.songCellIdentifier, for: indexPath)
         if tracks.indices.contains(indexPath.row) {
             cell.textLabel?.text = "\(indexPath.row + 1). " + tracks[indexPath.row]

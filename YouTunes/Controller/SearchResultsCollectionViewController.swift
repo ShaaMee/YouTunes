@@ -9,29 +9,33 @@ import UIKit
 
 class SearchResultsCollectionViewController: UICollectionViewController, UISearchControllerDelegate {
     
+    @IBOutlet weak var backgroundTextLabel: UILabel!
+    private let activityIndicator = UIActivityIndicatorView()
+    
+    var showLabel = true
+    
     var albumsInfo: AlbumThumbnailInfo?
     {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
-                self?.collectionView.layoutSubviews()
             }
         }
     }
-    
-    private let activityIndicator = UIActivityIndicatorView()
     
     var isSearching = false {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 switch self.isSearching {
+                
                 case true:
                     if let view = self.view {
                         view.addSubview(self.activityIndicator)
                     }
                     self.activityIndicator.isHidden = false
                     self.activityIndicator.startAnimating()
+                    
                 case false:
                     self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
@@ -43,7 +47,9 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
         
     private var albums: [ThumbnailResult]? {
         return albumsInfo?.results?.sorted { album1, album2 in
-            guard let name1 = album1.collectionName, let name2 = album2.collectionName else { return false }
+            guard let name1 = album1.collectionName,
+                  let name2 = album2.collectionName
+            else { return false }
             return name1.lowercased() < name2.lowercased()
         }
     }
@@ -59,6 +65,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
         
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
         view.addSubview(activityIndicator)
+        backgroundTextLabel.isHidden = !showLabel
     }
 
     // MARK: - Navigation
@@ -78,7 +85,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
- 
+        
         guard let albums = albums else { return 0 }
         return albums.count
     }
@@ -105,43 +112,10 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
                     searchCell.albumArtwork.image = image
                     searchCell.layoutIfNeeded()
                 }
-
             }
         }
         return searchCell
     }
-
-    // MARK: - UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
 
 extension SearchResultsCollectionViewController: UISearchBarDelegate {
@@ -161,6 +135,7 @@ extension SearchResultsCollectionViewController: UISearchBarDelegate {
 
         albumsInfo = nil
         isSearching = true
+        backgroundTextLabel.isHidden = true
         NetworkService.shared.fetchAlbumsForTerm(searchText, alertViewController: self) { [weak self] albumThumbnailInfo in
             self?.albumsInfo = albumThumbnailInfo
                 DispatchQueue.main.async {
@@ -171,6 +146,6 @@ extension SearchResultsCollectionViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         albumsInfo = nil
+        backgroundTextLabel.isHidden = false
     }
 }
-

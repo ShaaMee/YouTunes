@@ -24,5 +24,4 @@ struct AlbumInfo: Codable {
     var releaseDate: Date?
     var primaryGenreName: String?
     var trackName: String?
-    var trackNumber: Int?
 }

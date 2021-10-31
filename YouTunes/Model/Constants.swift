@@ -15,4 +15,5 @@ struct Constants {
     static let albumNoImageSystemName = "photo"
     static let detailsSegueIdentifier = "showDetails"
     static let songCellIdentifier = "songCell"
+    static let songsListRowHeight: Double = 44
 }
