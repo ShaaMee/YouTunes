@@ -29,27 +29,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.note" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OGd-6c-DYD">
-                                <rect key="frame" x="20.5" y="262" width="373" height="372"/>
-                                <color key="tintColor" systemColor="opaqueSeparatorColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="OGd-6c-DYD" secondAttribute="height" multiplier="1:1" id="raT-to-Ip6"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mJG-V2-DGA" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="17P-c7-rZE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mJG-V2-DGA" secondAttribute="trailing" constant="78.5" id="1dN-tQ-Exj"/>
-                            <constraint firstItem="OGd-6c-DYD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5BU-dt-DNv"/>
                             <constraint firstItem="HsE-51-98d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="88.5" id="5ux-kw-1WR"/>
-                            <constraint firstItem="OGd-6c-DYD" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.9" id="78C-ve-5sc"/>
                             <constraint firstItem="mJG-V2-DGA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="78.5" id="F6a-gy-YSm"/>
                             <constraint firstItem="HsE-51-98d" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Hku-Go-er1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HsE-51-98d" secondAttribute="trailing" constant="88.5" id="KJb-gt-WyV"/>
                             <constraint firstItem="HsE-51-98d" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ka4-Im-OM7"/>
-                            <constraint firstItem="OGd-6c-DYD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RfD-K3-aVf"/>
                             <constraint firstItem="HsE-51-98d" firstAttribute="top" secondItem="mJG-V2-DGA" secondAttribute="bottom" constant="8" symbolic="YES" id="tbP-Vr-Vir"/>
                         </constraints>
                     </view>
@@ -60,10 +50,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="music.note" catalog="system" width="97" height="128"/>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
