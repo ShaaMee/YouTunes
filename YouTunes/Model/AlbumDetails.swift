@@ -7,13 +7,15 @@
 
 import Foundation
 
-// MARK: - AlbumDetails
+// MARK: - Data received from JSON
+
 struct AlbumDetails: Codable {
     var resultCount: Int?
     var results: [AlbumInfo]?
 }
 
-// MARK: - Result
+// MARK: - Current album details (for the first element) and list of songs (for further elements)
+
 struct AlbumInfo: Codable {
     var artistName: String?
     var collectionName: String?

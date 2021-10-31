@@ -7,12 +7,14 @@
 
 import Foundation
 
-// MARK: - AlbumThumbnailInfo
+// MARK: - Data received from JSON
+
 struct AlbumThumbnailInfo: Codable {
     var results: [ThumbnailResult]?
 }
 
-// MARK: - Result
+// MARK: - Short info for CollectionView display
+
 struct ThumbnailResult: Codable {
     var collectionId: Int?
     var artistName, collectionName: String?

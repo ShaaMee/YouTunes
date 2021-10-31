@@ -14,6 +14,8 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
     
     var showLabel = true
     
+    // MARK: - All data from API request
+    
     var albumsInfo: AlbumThumbnailInfo?
     {
         didSet {
@@ -29,13 +31,14 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
                 guard let self = self else { return }
                 switch self.isSearching {
                 
+                // showing and running activity indicator
                 case true:
                     if let view = self.view {
                         view.addSubview(self.activityIndicator)
                     }
                     self.activityIndicator.isHidden = false
                     self.activityIndicator.startAnimating()
-                    
+                // hiding and stopping activity indicator
                 case false:
                     self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
@@ -44,7 +47,9 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
             }
         }
     }
-        
+    
+    // MARK: - Albums data sorted by album name
+    
     private var albums: [ThumbnailResult]? {
         return albumsInfo?.results?.sorted { album1, album2 in
             guard let name1 = album1.collectionName,
@@ -57,6 +62,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Creating and seting up a UISearchController
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.delegate = self
@@ -77,6 +83,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
               let albumID = item.albumID
         else { return }
         
+        // Fetching album details and passing it to destination view controller
         NetworkService.shared.fetchAlbumDetailsForAlbumID(albumID, alertViewController: self) { albumDetails in
             destinationVC.albumDetails = albumDetails
         }
@@ -85,7 +92,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+
         guard let albums = albums else { return 0 }
         return albums.count
     }
@@ -96,12 +103,14 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
         guard let searchCell = cell as? SearchResultsCollectionViewCell else { return cell }
         guard let albums = albums else { return cell }
         
+        // Setting up the cell outlets (including dummy image)
         searchCell.artistName.text = albums[indexPath.row].artistName
         searchCell.albumName.text = albums[indexPath.row].collectionName
         searchCell.albumID = albums[indexPath.row].collectionId
         searchCell.albumArtwork.image = UIImage(systemName: Constants.albumNoImageSystemName)
         searchCell.albumArtwork.tintColor = .systemGray6
         
+        // Fetching album image in background queue
         DispatchQueue.global(qos: .utility).async {
             if let artWorkURL = albums[indexPath.row].artworkUrl100 {
                 guard let url = URL(string: artWorkURL),
@@ -124,6 +133,7 @@ extension SearchResultsCollectionViewController: UISearchBarDelegate {
                 
         guard let searchText = searchBar.text else { return }
         
+        // Checking if search request is already saved, otherwise save it to UserDefaults
         if var searchHistory: Array<String> = UserDefaults.standard.stringArray(forKey: Constants.historySearchKey) {
             if !searchHistory.contains(searchText) {
                 searchHistory.append(searchText)
@@ -136,6 +146,8 @@ extension SearchResultsCollectionViewController: UISearchBarDelegate {
         albumsInfo = nil
         isSearching = true
         backgroundTextLabel.isHidden = true
+        
+        // Fetching albums for current search request
         NetworkService.shared.fetchAlbumsForTerm(searchText, alertViewController: self) { [weak self] albumThumbnailInfo in
             self?.albumsInfo = albumThumbnailInfo
                 DispatchQueue.main.async {

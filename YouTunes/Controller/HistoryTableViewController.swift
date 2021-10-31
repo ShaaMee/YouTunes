@@ -9,19 +9,20 @@ import UIKit
 
 class HistoryTableViewController: UITableViewController {
     
+    // Getting search history from UserDefaults
     var searchHistory: [String] {
         return UserDefaults.standard.stringArray(forKey: Constants.historySearchKey) ?? []
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Realoading data in case user switched to search tab and performed new search
         tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return searchHistory.count
     }
 
@@ -44,6 +45,8 @@ class HistoryTableViewController: UITableViewController {
         
         if let searchTerm = cell.textLabel?.text {
             searchVC.isSearching = true
+            
+            // Fetching albums for selected row and passing data to destination view controller
             NetworkService.shared.fetchAlbumsForTerm(searchTerm, alertViewController: self) { albumThumbnailInfo in
                 searchVC.albumsInfo = albumThumbnailInfo
                 searchVC.isSearching = false

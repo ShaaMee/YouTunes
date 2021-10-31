@@ -21,12 +21,14 @@ class NetworkService {
     // MARK: - Fetching artist's albums from iTunes API
     
     func fetchAlbumsForTerm(_ searchTerm: String, alertViewController vc: UIViewController, completionHandler: @escaping (AlbumThumbnailInfo) -> Void) {
+        
+        // Formatting search string for creating correct URL
         guard let formattedSearchString = searchTerm
             .trimmingCharacters(in: .whitespaces)
             .replacingOccurrences(of: " ", with: "+")
             .addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         else {
-            AlertService.shared.showAlertWith(messeage: "WRONG URL CHARACTERS", inViewController: vc)
+            AlertService.shared.showAlertWith(messeage: "Wrong URL!", inViewController: vc)
             return
         }
         let searchURLString = "https://itunes.apple.com/search?term=" + formattedSearchString + "&media=music&entity=album"
@@ -54,6 +56,8 @@ class NetworkService {
         }
     }
     
+    // MARK: - Creating network request for passed URL, decoding result
+    
     private func networkRequestFor(string: String, alertViewController vc: UIViewController, completionHandler: @escaping (AlbumThumbnailInfo?, AlbumDetails?) -> Void){
         
         guard let url = URL(string: string) else { return }
@@ -66,12 +70,14 @@ class NetworkService {
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             
             if let error = error {
-                print(error.localizedDescription)
+                // Shows alert with error description
                 AlertService.shared.showAlertWith(messeage: error.localizedDescription, inViewController: vc)
             } else if let data = data,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200 {
                 
+                // Looks like received JSON can be successfully decoded both to AlbumThumbnailInfo and AlbumDetails types.
+                // So we decode it twice and pass to closure from which we can get the one we need.
                 let thumbnailsInfo = try? self?.decoder.decode(AlbumThumbnailInfo.self, from: data)
                 let albumDetails = try? self?.decoder.decode(AlbumDetails.self, from: data)
                 

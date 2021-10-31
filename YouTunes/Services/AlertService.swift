@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+// MARK: - Helper class for cteating and presenting alerts when error occurs
+
 class AlertService {
     static let shared = AlertService()
     
@@ -18,6 +20,7 @@ class AlertService {
             alert.addAction(action)
             vc.present(alert, animated: true) {
                 
+                // Looking up for SearchResultsCollectionViewController to stop the activityIndicator
                 guard let controllers = vc.navigationController?.viewControllers else { return }
                 
                 for controller in controllers {

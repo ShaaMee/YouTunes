@@ -24,13 +24,17 @@ class DetailsViewController: UIViewController {
         }
     }
     
+    // List of song names
     private var tracks = [String]() {
         didSet {
             songsTableView.reloadData()
+            
+            //setting the hight of tableView to fit inside scrollView
             tableViewHeight.constant = CGFloat(Constants.songsListRowHeight * Double(tracks.count))
         }
     }
     
+    // Setting the dateFormatter to get the album's year of release
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
@@ -39,12 +43,16 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // setting the dummy until image from server is available
         albumCover.image = UIImage(systemName: Constants.albumNoImageSystemName)
         albumCover.tintColor = .systemGray6
+        
         songsTableView.delegate = self
         songsTableView.dataSource = self
     }
+    
+    // MARK: - Getting album info from received data and setting outlets
     
     private func extractDataFromAlbumDetails() {
         
@@ -66,6 +74,7 @@ class DetailsViewController: UIViewController {
         albumName.text = albumDetails.results?.first?.collectionName
         artistName.text = albumDetails.results?.first?.artistName
         
+        // Fetching album cover image in background
         DispatchQueue.global().async { [weak self] in
             guard let coverURL = albumDetails.results?.first?.artworkUrl240,
                   let url = URL(string: coverURL),
@@ -79,6 +88,8 @@ class DetailsViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Getting songs names from data and putting result into array
     
     private func loadSongs(){
         
