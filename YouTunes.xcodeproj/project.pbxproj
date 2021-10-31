@@ -15,6 +15,7 @@
 		CE44CA23272D531300558F9C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44CA22272D531300558F9C /* NetworkService.swift */; };
 		CE44CA29272D544600558F9C /* AlbumDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44CA28272D544600558F9C /* AlbumDetails.swift */; };
 		CE57B463272DB290006B97A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57B462272DB290006B97A0 /* Constants.swift */; };
+		CE57B468272ED215006B97A0 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57B467272ED215006B97A0 /* AlertService.swift */; };
 		CEB90529272B28FA00126849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB90528272B28FA00126849 /* AppDelegate.swift */; };
 		CEB9052B272B28FA00126849 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9052A272B28FA00126849 /* SceneDelegate.swift */; };
 		CEB90530272B28FA00126849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB9052E272B28FA00126849 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		CE44CA22272D531300558F9C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		CE44CA28272D544600558F9C /* AlbumDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetails.swift; sourceTree = "<group>"; };
 		CE57B462272DB290006B97A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE57B467272ED215006B97A0 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		CEB90525272B28FA00126849 /* YouTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB90528272B28FA00126849 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB9052A272B28FA00126849 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				CE44CA22272D531300558F9C /* NetworkService.swift */,
+				CE57B467272ED215006B97A0 /* AlertService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE57B468272ED215006B97A0 /* AlertService.swift in Sources */,
 				CE44CA02272C317C00558F9C /* HistoryTableViewController.swift in Sources */,
 				CE44CA0F272C484D00558F9C /* SearchResultsCollectionViewCell.swift in Sources */,
 				CEB90529272B28FA00126849 /* AppDelegate.swift in Sources */,

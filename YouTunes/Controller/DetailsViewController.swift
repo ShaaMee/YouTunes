@@ -9,9 +9,8 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
     var albumDetails: AlbumDetails? {
         didSet {
             DispatchQueue.main.async { [weak self] in

@@ -47,7 +47,7 @@ class HistoryTableViewController: UITableViewController {
         guard segue.identifier == Constants.searchHistoryToResultsSegueIdetifier, let searchVC = segue.destination as? SearchResultsCollectionViewController, let cell = sender as? UITableViewCell else { return }
         if let searchTerm = cell.textLabel?.text {
             searchVC.isSearching = true
-            NetworkService.shared.fetchAlbumsForTerm(searchTerm) { albumThumbnailInfo in
+            NetworkService.shared.fetchAlbumsForTerm(searchTerm, alertViewController: self) { albumThumbnailInfo in
                 searchVC.albumsInfo = albumThumbnailInfo
                 searchVC.isSearching = false
             }

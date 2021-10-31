@@ -70,7 +70,7 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
               let albumID = item.albumID
         else { return }
         
-        NetworkService.shared.fetchAlbumDetailsForAlbumID(albumID) { albumDetails in
+        NetworkService.shared.fetchAlbumDetailsForAlbumID(albumID, alertViewController: self) { albumDetails in
             destinationVC.albumDetails = albumDetails
         }
     }
@@ -108,9 +108,6 @@ class SearchResultsCollectionViewController: UICollectionViewController, UISearc
 
             }
         }
-        
-        
-        
         return searchCell
     }
 
@@ -164,7 +161,7 @@ extension SearchResultsCollectionViewController: UISearchBarDelegate {
 
         albumsInfo = nil
         isSearching = true
-        NetworkService.shared.fetchAlbumsForTerm(searchText) { [weak self] albumThumbnailInfo in
+        NetworkService.shared.fetchAlbumsForTerm(searchText, alertViewController: self) { [weak self] albumThumbnailInfo in
             self?.albumsInfo = albumThumbnailInfo
                 DispatchQueue.main.async {
                     self?.isSearching = false

@@ -116,9 +116,7 @@
                         <outlet property="albumCover" destination="L0X-Tt-KXk" id="prC-QV-xhO"/>
                         <outlet property="albumName" destination="uQf-Ak-e9e" id="tBz-KJ-B0A"/>
                         <outlet property="artistName" destination="R9L-ld-KLH" id="o6t-f1-L4u"/>
-                        <outlet property="contentView" destination="cMf-wX-0dw" id="qrI-m0-0vV"/>
                         <outlet property="genreAndYear" destination="Ot6-u4-gEg" id="hUU-9e-9FH"/>
-                        <outlet property="scrollView" destination="DyK-Km-QsA" id="Ixn-qu-Pv4"/>
                         <outlet property="songsTableView" destination="AhO-0k-4jP" id="I5J-S8-iYI"/>
                         <outlet property="tableViewHeight" destination="Sot-hm-bqg" id="1gd-hJ-Mgv"/>
                     </connections>
