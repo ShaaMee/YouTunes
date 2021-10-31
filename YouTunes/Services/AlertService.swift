@@ -16,7 +16,16 @@ class AlertService {
             let alert = UIAlertController(title: "Something is wrong", message: messeage, preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .default)
             alert.addAction(action)
-            vc.present(alert, animated: true, completion: nil)
+            vc.present(alert, animated: true) {
+                
+                guard let controllers = vc.navigationController?.viewControllers else { return }
+                
+                for controller in controllers {
+                    if let controller = controller as? SearchResultsCollectionViewController {
+                        controller.isSearching = false
+                    }
+                }
+            }
         }
     }
 }

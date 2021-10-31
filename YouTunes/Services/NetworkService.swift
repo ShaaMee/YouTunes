@@ -21,9 +21,14 @@ class NetworkService {
     // MARK: - Fetching artist's albums from iTunes API
     
     func fetchAlbumsForTerm(_ searchTerm: String, alertViewController vc: UIViewController, completionHandler: @escaping (AlbumThumbnailInfo) -> Void) {
-        let formattedSearchString = searchTerm
+        guard let formattedSearchString = searchTerm
             .trimmingCharacters(in: .whitespaces)
             .replacingOccurrences(of: " ", with: "+")
+            .addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        else {
+            AlertService.shared.showAlertWith(messeage: "WRONG URL CHARACTERS", inViewController: vc)
+            return
+        }
         let searchURLString = "https://itunes.apple.com/search?term=" + formattedSearchString + "&media=music&entity=album"
         
         networkRequestFor(string: searchURLString, alertViewController: vc) { details, _ in
