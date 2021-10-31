@@ -2,7 +2,7 @@
 //  SearchResultsCollectionViewCell.swift
 //  YouTunes
 //
-//  Created by user on 29.10.2021.
+//  Created by Aleksei Pavlov on 29.10.2021.
 //
 
 import UIKit

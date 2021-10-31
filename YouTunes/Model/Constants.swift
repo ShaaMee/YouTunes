@@ -2,7 +2,7 @@
 //  Constants.swift
 //  YouTunes
 //
-//  Created by user on 30.10.2021.
+//  Created by Aleksei Pavlov on 30.10.2021.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  DetailsViewController.swift
 //  YouTunes
 //
-//  Created by user on 29.10.2021.
+//  Created by Aleksei Pavlov on 29.10.2021.
 //
 
 import UIKit
@@ -66,15 +66,18 @@ class DetailsViewController: UIViewController {
         albumName.text = albumDetails.results?.first?.collectionName
         artistName.text = albumDetails.results?.first?.artistName
         
-        guard let coverURL = albumDetails.results?.first?.artworkUrl240,
-              let url = URL(string: coverURL),
-              let data = try? Data(contentsOf: url),
-              let image = UIImage(data: data)
-        else { return }
-        
-        albumCover.image = image
-        
-        loadSongs()
+        DispatchQueue.global().async { [weak self] in
+            guard let coverURL = albumDetails.results?.first?.artworkUrl240,
+                  let url = URL(string: coverURL),
+                  let data = try? Data(contentsOf: url),
+                  let image = UIImage(data: data)
+            else { return }
+            
+            DispatchQueue.main.async {
+                self?.albumCover.image = image
+                self?.loadSongs()
+            }
+        }
     }
     
     func loadSongs(){
